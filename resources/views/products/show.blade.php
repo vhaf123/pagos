@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-span-5">
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-body">
                         <div class="flex items-center justify-between">
                             <h1 class="text-lg font-bold text-gray-700">Métodos de pago:</h1>
@@ -62,7 +62,8 @@
                         </form>
 
                     </div>
-                </div>
+                </div> --}}
+                @livewire('method-payment', ['product' => $product])
             </div>
         </div>
 
@@ -70,48 +71,6 @@
     </div>
 
 
-    @slot('js')
-        <script>
-            const stripe = Stripe('pk_test_pV6a8p89xYseknkb3knrqJZf00agbPkHNG');
-
-            const elements = stripe.elements();
-            const cardElement = elements.create('card');
-            
-
-            cardElement.mount('#card-element');
-
-            //paymentMethod
-            const cardHolderName = document.getElementById('card-holder-name');
-            const cardForm = document.getElementById('card-form');
-            /* const paymentMethodId = elements.create('payment-method-id'); */
-
-            cardForm.addEventListener('submit', async (e) => {
-
-                e.preventDefault(); 
-                
-
-                const {
-                    paymentMethod,
-                    error
-                } = await stripe.createPaymentMethod(
-                    'card', cardElement, {
-                        billing_details: {
-                            name: cardHolderName.value
-                        }
-                    }
-                );
-
-                if (error) {
-                    
-                } else {
-                    const paymentMethodId = document.getElementById('payment-method-id');
-                    paymentMethodId.value = paymentMethod.id;
-                    
-                    cardForm.submit();
-                }
-            });
-
-        </script>
-    @endslot
+  
 
 </x-app-layout>

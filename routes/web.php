@@ -16,3 +16,13 @@ Route::get('articles/{article}', [ArticleController::class, 'show'])->name('arti
 Route::get('billings', [BillingController::class, 'index'])->name('billings.index');
 
 Route::post('stripe/pay/{product}', [StripeController::class, 'pay'])->name('stripe.pay');
+
+
+
+Route::get('payment-method', function () {
+    /* foreach (auth()->user()->paymentMethods() as $paymentMethod) {
+        dd($paymentMethod->created);
+    } */
+
+    dd(auth()->user()->defaultPaymentMethod()->id);
+});
