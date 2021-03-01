@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class PaymentMethodList extends Component
 {
-    protected $listeners = ['paymentMethodIndex' => 'render'];
+    protected $listeners = ['render'];
 
     public function render()
     {

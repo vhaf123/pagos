@@ -12,7 +12,7 @@ class PaymentMethodCreate extends Component
     {
 
         $this->emit('restartStripe');
-        $this->emit('paymentMethodIndex');
+        
 
         return view('livewire.payment-method-create', [
             'intent' => auth()->user()->createSetupIntent()
@@ -27,5 +27,6 @@ class PaymentMethodCreate extends Component
             auth()->user()->updateDefaultPaymentMethod($paymentMethod);
         }
 
+        $this->emit('render');
     }
 }

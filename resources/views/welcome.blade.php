@@ -5,21 +5,22 @@
         <div class="grid grid-cols-3 gap-6">
             @foreach ($products as $product)
 
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
-                    <div class="px-4 py-2">
-                        <h1 class="text-gray-900 font-bold text-3xl uppercase">{{$product->title}}</h1>
-                        <p class="text-gray-600 text-sm mt-1">{{Str::limit($product->descripcion, 150)}}</p>
+                <div class="card">
+                    <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+                        <h1 class="text-gray-200 font-bold text-xl">{{$product->price}} USD</h1>
+                        <a href="{{route('products.show', $product)}}" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Comprar</a>
                     </div>
-                    <div class="mt-auto">
-                        <img class="h-56 w-full object-cover mt-2"
+
+                    <img class="h-56 w-full object-cover"
                             src="{{Storage::url($product->image)}}"
                             alt="NIKE AIR">
-                        <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
-                            <h1 class="text-gray-200 font-bold text-xl">{{$product->price}} USD</h1>
-                            <a href="{{route('products.show', $product)}}" class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Comprar</a>
-                        </div>
+
+                    <div class="card-body">
+                        <h1 class="text-gray-900 font-bold text-xl uppercase">{{$product->title}}</h1>
+                        <p class="text-gray-600 text-sm mt-1">{{Str::limit($product->descripcion, 150)}}</p>
                     </div>
                 </div>
+                
             @endforeach
         </div>
 

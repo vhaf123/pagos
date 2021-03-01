@@ -6,7 +6,7 @@
                 <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" class="h-8 ml-3">
             </div>
 
-
+            {{-- {{$cupon}} --}}
             <form action="{{ route('stripe.pay', $product) }}" class="mt-4" autocomplete="off" method="POST"
                 id="card-form">
                 @csrf
@@ -79,10 +79,7 @@
                     if (error) {
                         
                     } else {
-                        const paymentMethodId = document.getElementById('payment-method-id');
-                        paymentMethodId.value = paymentMethod.id;
-                        
-                        cardForm.submit();
+                        Livewire.emit('pay', paymentMethod.id);
                     }
                 });
             }
