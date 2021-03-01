@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\PaymentMethod;
+namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class Create extends Component
+class PaymentMethodCreate extends Component
 {
     protected $listeners = ['paymentMethodCreate'];
 
@@ -14,7 +14,7 @@ class Create extends Component
         $this->emit('restartStripe');
         $this->emit('paymentMethodIndex');
 
-        return view('livewire.payment-method.create', [
+        return view('livewire.payment-method-create', [
             'intent' => auth()->user()->createSetupIntent()
         ]);
     }

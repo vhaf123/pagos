@@ -1,8 +1,9 @@
 <article class="card relative">
 
-    <div id="spinner" class="absolute w-full h-full bg-gray-100 bg-opacity-25 z-30 flex items-center justify-center hidden">
-        <!-- component -->
-        <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-20 w-20"></div>
+    <div wire:loading>
+        <div class="absolute w-full h-full bg-gray-100 bg-opacity-25 z-30 flex items-center justify-center">
+            <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-20 w-20"></div>
+        </div>
     </div>
 
     <form autocomplete="off" id="card-form">

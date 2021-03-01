@@ -191,11 +191,11 @@
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div>
-                @livewire('payment-method.create')
+                @livewire('payment-method-create')
             </div>
 
             <div class="mt-8">
-                @livewire('payment-method.index')
+                @livewire('payment-method-list')
             </div>
         </div>
 
@@ -210,7 +210,6 @@
 
             Livewire.on('restartStripe', function() {
                 document.getElementById("card-form").reset();
-                document.getElementById('spinner').classList.add("hidden");
                 stripe();
             })
 
@@ -234,6 +233,7 @@
                 cardButton.addEventListener('click', async (e) => {
 
                     e.preventDefault();
+                    document.getElementById('card-button').disabled=true;
 
                     const {
                         setupIntent,
@@ -251,11 +251,11 @@
 
                     if (error) {
 
+                        document.getElementById('card-button').disabled=false;
                         document.getElementById('cardErrors').textContent = error.message;
 
                     } else {
-
-                        document.getElementById('spinner').classList.remove("hidden");
+                        
                         Livewire.emit('paymentMethodCreate', setupIntent.payment_method);
                         
                     }

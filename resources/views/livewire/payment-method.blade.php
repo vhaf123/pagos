@@ -1,94 +1,20 @@
-<div>
-    <article class="card">
-        <form action="" autocomplete="off">
-            <div class="card-body">
-                <h1 class="text-gray-700 text-lg font-bold mb-4">Agregar método de pago</h1>
+<article class="flex justify-between items-center py-2 hover:bg-blue-50 px-2">
+    <div class="flex-1 text-sm text-gray-700">
+        <h1><span class="font-bold">{{ $paymentMethod->billing_details->name }}</span>
+            xxxx-{{ $paymentMethod->card->last4 }} @if (auth()->user()->defaultPaymentMethod()->id == $paymentMethod->id)
+                (default)
+            @endif
 
-                <div class="flex">
-
-                    <p class="text-gray-700">Información de tarjeta</p>
-                    
-                    <div class="flex-1 ml-6">
-                        
-                        <div class="form-group">
-                            <input class="form-control" id="card-holder-name"
-                                placeholder="Nombre del titular de la tarjeta">
-                        </div>
-
-                        <!-- Stripe Elements Placeholder -->
-                        <div>
-                            <div wire:model="info" class="form-control" id="card-element"></div>
-                            <span id="cardErrors"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer bg-gray-50 flex justify-end">
+        </h1>
+        <p>Expira {{ $paymentMethod->card->exp_month }}/{{ $paymentMethod->card->exp_year }}</p>
+    </div>
 
 
-                <button class="btn btn-primary" id="card-button" data-secret="{{ $intent->client_secret }}">
-                    Update Payment Method
-                </button>
-            </div>
-        </form>
-    </article>
+    <div
+        class="grid grid-cols-3 divide-x divide-gray-200 border border-gray-200 rounded-md text-xs text-gray-500">
+        <i class="fas fa-pen  p-3 cursor-pointer hover:bg-white hover:text-gray-700"></i>
+        <i class="fas fa-trash p-3 cursor-pointer hover:bg-white hover:text-gray-700"></i>
+        <i class="fas fa-star p-3 cursor-pointer hover:bg-white hover:text-gray-700"></i>
+    </div>
 
-
-
-    @push('js')
-
-        {{-- <script>
-
-            stripe();
-
-            Livewire.on('postAdded', function() {
-
-                document.getElementById('card-holder-name').value = "";
-                stripe();
-                
-            })
-
-            function stripe() {
-                const stripe = Stripe('pk_test_pV6a8p89xYseknkb3knrqJZf00agbPkHNG');
-
-                const elements = stripe.elements();
-                const cardElement = elements.create('card');
-
-                cardElement.mount('#card-element');
-
-                const cardHolderName = document.getElementById('card-holder-name');
-                const cardButton = document.getElementById('card-button');
-                const clientSecret = cardButton.dataset.secret;
-
-                cardButton.addEventListener('click', async (e) => {
-
-                    e.preventDefault();
-
-                    const {
-                        setupIntent,
-                        error
-                    } = await stripe.confirmCardSetup(
-                        clientSecret, {
-                            payment_method: {
-                                card: cardElement,
-                                billing_details: {
-                                    name: cardHolderName.value
-                                }
-                            }
-                        }
-                    );
-
-                    if (error) {
-                        // Display "error.message" to the user...
-                    } else {
-                        
-                        /* Livewire.emit('createPaymentMethod', setupIntent.payment_method); */
-                        Livewire.emit('paymentMethods2');
-                    }
-                });
-            }
-
-        </script> --}}
-
-    @endpush
-</div>
+</article>
